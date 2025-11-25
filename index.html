@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Laboratorium Fisika Teori & Komputasi - Universitas Hasanuddin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================
+   GLOBAL BASE THEME
+========================================= */
+:root{
+  --text:#e6eef8;
+  --card-bg:rgba(255,255,255,0.07);
+  --navbar-bg:rgba(255,255,255,0.1);
+  --accent1:#b91c1c;   /* merah */
+  --accent2:#0b69b3;   /* biru */
+  --radius:14px;
+}
+
+/* THEME MODE -------------------------------- */
+body[data-theme="light"]{
+  --text:#0b0b15;
+  --card-bg:rgba(255,255,255,0.7);
+  --navbar-bg:rgba(255,255,255,0.85);
+}
+
+html,body{
+  margin:0;
+  font-family:Inter,system-ui;
+  color:var(--text);
+  overflow-x:hidden;
+
+  /* ★ Background galaksi permanen */
+  background:
+    radial-gradient(circle at 50% 50%, #0d1b2a, #000814 70%, #000000),
+    url('https://www.transparenttextures.com/patterns/stardust.png');
+  background-size:cover;
+  background-attachment:fixed;
+}
+
+/* lapisan bintang */
+body::before{
+  content:"";
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  background:url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity:0.4;
+  pointer-events:none;
+  z-index:-1;
+}
+
+.container{
+  max-width:1200px;
+  margin:26px auto;
+  padding:15px;
+}
+
+/* =========================================
+   HEADER NAV
+========================================= */
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px;
+  border-radius:var(--radius);
+  background:var(--navbar-bg);
+  backdrop-filter:blur(6px);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo-wrap{
+  width:64px;height:64px;
+  border-radius:50%;
+  background:white !important; /* sesuai permintaan */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.logo-wrap img{
+  width:56px;height:56px;
+  object-fit:contain;
+  filter:none !important;
+}
+
+.title h1{
+  margin:0;
+  font-family:Montserrat;
+  font-size:19px;
+  line-height:1.2;
+}
+
+/* NAVIGATION */
+nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.navbtn{
+  background:#b91c1c;
+  border:0;
+  padding:8px 12px;
+  border-radius:10px;
+  color:white;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.navbtn.active{
+  outline:2px solid white;
+}
+
+/* =========================================
+   PAGES SECTION
+========================================= */
+.page{
+  display:none;
+  margin-top:22px;
+}
+
+h2{
+  margin-top:0;
+}
+
+.card{
+  background:var(--card-bg);
+  border-radius:var(--radius);
+  padding:16px;
+  margin-top:12px;
+}
+
+/* FORM INPUT */
+.input, textarea, select{
+  width:100%;
+  padding:10px;
+  background:rgba(255,255,255,0.07);
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  color:var(--text);
+}
+
+/* GALLERY */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:12px;
+}
+
+.gallery-grid img{
+  width:100%;
+  height:130px;
+  object-fit:cover;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.15s;
+}
+.gallery-grid img:hover{
+  transform:scale(1.04);
+}
+
+.theme-switch{
+  margin-left:12px;
+  cursor:pointer;
+  font-weight:bold;
+  background:#fff;
+  color:#000;
+  padding:6px 12px;
+  border-radius:10px;
+}
+
+.footer{
+  text-align:center;
+  margin-top:35px;
+  opacity:.65;
+  font-size:13px;
+}
+
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="container">
+
+<!-- ==============================
+     HEADER
+================================= -->
+<header>
+  <div class="brand">
+    <div class="logo-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Logo_Unhas.png">
+    </div>
+    <div class="title">
+      <h1>Lab Fisika Teori & Komputasi</h1>
+      <small>Universitas Hasanuddin</small>
+    </div>
+  </div>
+
+  <nav>
+    <button class="navbtn" onclick="showPage('beranda')" id="btn-beranda">Beranda</button>
+    <button class="navbtn" onclick="showPage('profil')" id="btn-profil">Profil</button>
+    <button class="navbtn" onclick="showPage('mahasiswa')" id="btn-mahasiswa">Mahasiswa</button>
+    <button class="navbtn" onclick="showPage('galeri')" id="btn-galeri">Galeri</button>
+
+    <button class="theme-switch" onclick="toggleTheme()">Tema</button>
+  </nav>
+</header>
+
+<!-- ===============================
+     BERANDA
+================================= -->
+<section class="page" id="beranda">
+  <div class="card">
+    <h2>Selamat Datang di Laboratorium</h2>
+    <p>
+      Sebuah ruang akademik untuk mengembangkan fisika teoretis dan simulasi komputasi.
+      Mahasiswa, peneliti, dan dosen berkolaborasi mengeksplorasi alam semesta dari mekanika kuantum,
+      relativitas, komputasi numerik hingga pemodelan sistem kompleks.
+    </p>
+  </div>
+</section>
+
+<!-- ===============================
+     PROFIL
+================================= -->
+<section class="page" id="profil">
+  <div class="card">
+    <h2>Profil Laboratorium</h2>
+    <p>
+      Laboratorium Fisika Teori & Komputasi Universitas Hasanuddin merupakan pusat penelitian
+      yang berfokus pada pemodelan matematis, eksplorasi sifat dasar alam, serta simulasi fisika modern.
+    </p>
+    <p>
+      Bidang riset utama meliputi:
+    </p>
+    <ul>
+      <li>Relativitas umum dan fisika lubang hitam</li>
+      <li>Mekanika kuantum dan sistem atomik</li>
+      <li>Fisika material komputasi</li>
+      <li>Dinamika nonlinier dan sistem kompleks</li>
+      <li>Simulasi numerik dan HPC</li>
+    </ul>
+    <p>
+      Mahasiswa didorong mengembangkan kemampuan analisis mendalam, keterampilan komputasi tingkat lanjut,
+      serta ketajaman intuisi fisika. Lab ini juga mendukung riset publikasi nasional dan internasional.
+    </p>
+  </div>
+</section>
+
+<!-- ===============================
+     MAHASISWA
+================================= -->
+<section class="page" id="mahasiswa">
+  <div class="card">
+    <h2>Data Mahasiswa</h2>
+
+    <div style="margin-top:10px;">
+      <input class="input" id="nama" placeholder="Nama mahasiswa">
+      <br><br>
+      <input class="input" id="judul" placeholder="Judul penelitian">
+      <br><br>
+      <button onclick="tambahMhs()">Tambah Data</button>
+    </div>
+
+    <table class="table" id="tblMhs" style="margin-top:15px;width:100%;">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Judul Penelitian</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+  </div>
+</section>
+
+<!-- ===============================
+     GALERI
+================================= -->
+<section class="page" id="galeri">
+  <div class="card">
+    <h2>Galeri</h2>
+    <p>Unggah gambar di bawah, dan otomatis ditampilkan:</p>
+
+    <input type="file" id="upload" accept="image/*" onchange="addImage()">
+    <br><br>
+
+    <div class="gallery-grid" id="gallery"></div>
+  </div>
+</section>
+
+<!-- ===============================
+     FOOTER
+================================= -->
+<div class="footer">
+  Laboratorium Fisika Teori & Komputasi - Universitas Hasanuddin
+</div>
+
+</div>
+
+<script>
+
+/* ==============================================================
+   PAGE MANAGER
+============================================================== */
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p => p.style.display="none");
+  document.getElementById(id).style.display="block";
+
+  document.querySelectorAll(".navbtn").forEach(b => b.classList.remove("active"));
+  document.getElementById("btn-"+id).classList.add("active");
+}
+
+showPage("beranda");  // default
+
+/* ==============================================================
+   THEME SWITCH
+============================================================== */
+function toggleTheme(){
+  const body=document.body;
+  body.dataset.theme = body.dataset.theme === "dark" ? "light" : "dark";
+}
+
+/* ==============================================================
+   ADD STUDENT DATA
+============================================================== */
+function tambahMhs(){
+  let nama = document.getElementById("nama").value.trim();
+  let judul = document.getElementById("judul").value.trim();
+
+  if(!nama || !judul){
+    alert("Isi semua data!");
+    return;
+  }
+
+  const row = `<tr><td>${nama}</td><td>${judul}</td></tr>`;
+  document.querySelector("#tblMhs tbody").innerHTML += row;
+
+  document.getElementById("nama").value="";
+  document.getElementById("judul").value="";
+}
+
+/* ==============================================================
+   GALLERY UPLOAD
+============================================================== */
+function addImage(){
+  const file=document.getElementById("upload").files[0];
+  if(!file) return;
+
+  const reader=new FileReader();
+  reader.onload = function(e){
+    const img=document.createElement("img");
+    img.src=e.target.result;
+    document.getElementById("gallery").appendChild(img);
+  }
+  reader.readAsDataURL(file);
+}
+
+</script>
+
+</body>
+</html>
